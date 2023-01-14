@@ -55,4 +55,12 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
+    override fun onBackPressed() {
+        val fragment =
+            this.supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)
+        (fragment as? IOnBackPressed)?.onBackPressed()?.let {
+            super.onBackPressed()
+        }
+    }
 }
